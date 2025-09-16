@@ -1,0 +1,25 @@
+name: Tests
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.8.17"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - run: pip install -U locust ruff pyright
+      - run: ruff check
+      - run: ruff format --check
+      - run: pyright
+      - run: pytest locustfile.py
