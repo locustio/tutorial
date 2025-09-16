@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "charliermarsh.ruff",
+        "locust.locust-vscode-extension"
+    ]
+}
